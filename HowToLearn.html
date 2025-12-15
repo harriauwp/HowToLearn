@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 1: Active Recall Arena</title>
+    <style>
+        /* Base UW-Parkside Inspired CSS Variables (from uploaded file snippet) */
+        :root {
+            --uwp-green: #016836;
+            --uwp-dark-green: #00502f;
+            --uwp-cool-grey: #dbd9d6;
+            --uwp-goldenrod: #faba31;
+            --bg: #f8fafc;
+            --ink: #111827;
+            --muted: #4b5563;
+            --card-bg: #ffffff;
+            --card-border: #e5e7eb;
+            --phase-color: var(--uwp-dark-green);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--ink);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+
+        h1 {
+            color: var(--uwp-green);
+            border-bottom: 3px solid var(--uwp-goldenrod);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: var(--phase-color);
+            margin-top: 30px;
+            border-left: 5px solid var(--phase-color);
+            padding-left: 10px;
+        }
+
+        .explanation {
+            font-style: italic;
+            color: var(--muted);
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f0f4f8; /* Light blue/grey for context */
+            border-radius: 4px;
+        }
+
+        .phase-content {
+            border: 1px solid var(--card-border);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            background-color: #fefefe;
+        }
+
+        .verbatim-observation {
+            background-color: #fffbe6; /* Light yellow for emphasis */
+            border-left: 5px solid var(--uwp-goldenrod);
+            padding: 15px;
+            white-space: pre-wrap;
+            font-family: Georgia, serif;
+            line-height: 1.8;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            border: 1px solid var(--uwp-cool-grey);
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+
+        table, th, td {
+            border: 1px solid var(--uwp-cool-grey);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eef2f6;
+            color: var(--ink);
+        }
+
+        .procedure-step {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Experiment 1: Active Recall Arena (Retrieval vs. Rereading)</h1>
+
+        <h3>Phase 1: Observation</h3>
+        <p class="explanation">This is your initial, personal reflection on your current study habits and academic performance. It is the necessary starting point for the scientific process, providing the real-world problem that this experiment will attempt to solve using learning science.</p>
+        
+        <div class="phase-content">
+            <p><strong>Student Observation (Verbatim):</strong></p>
+            <blockquote class="verbatim-observation">My go-to study method is to read my notes and the textbook over and over. It feels comfortable and familiar, and after a few passes, I start to recognize the material. But when I'm in the exam and have to write down answers from scratch, I freeze. I realize I never actually practiced retrieving the information on my own. I've been recognizing things instead of really learning them, and my C grades show it.</blockquote>
+        </div>
+
+        <h3>Phase 2: Curiosity</h3>
+        <p class="explanation">Curiosity is a broad, open-ended question that emerges directly from the core of your personal observation. It explores the *why*—the underlying reason your current study method (rereading/recognition) is failing to produce the desired outcome (good grades/retrieval).</p>
+        
+        <div class="phase-content">
+            <p><strong>Example Curiosity Question:</strong> *Why does the comfortable feeling of simply recognizing material during study sessions not translate into the ability to recall that information on a high-stakes exam?*</p>
+            <p><strong>Student Input Required:</strong> Please input your own Curiosity Question based on your observation (a minimum of 50 words):</p>
+            <textarea id="curiosity-input" placeholder="Enter your Curiosity Question here..."></textarea>
+        </div>
+
+        <h3>Phase 3: Research Question</h3>
+        <p class="explanation">The Research Question is a specific, focused, and testable refinement of your broad Curiosity. It guides the design of the experiment by asking for a measurable comparison between two different conditions. For this experiment, we compare your current method (Rereading) against the alternative suggested by the learning science literature (Retrieval Practice).</p>
+
+        <div class="phase-content">
+            <p><strong>Research Question:</strong><br>
+            Is **retrieval practice (active recall)** a more effective study method for long-term retention and performance on exams requiring written answers than **repeated rereading (passive study)**?</p>
+        </div>
+
+        <h3>Phase 4: Critical Hypothesis</h3>
+        <p class="explanation">A hypothesis is an educated, testable prediction that attempts to answer the research question. It identifies the Independent Variable (the study method) and the Dependent Variable (the test score) and posits a clear relationship. The *critical* part is predicting which method will be *more* effective.</p>
+
+        <div class="phase-content">
+            <p><strong>Your Hypothesis:</strong><br>
+            The use of **retrieval practice (active recall)** will result in a significantly better delayed test performance and higher retention than the use of **repeated rereading** for the same study material.</p>
+        </div>
+
+        <h3>Phase 5: (If....Then) Prediction</h3>
+        <p class="explanation">The final prediction is a precise, measurable statement of the expected outcome of the experiment, assuming your Hypothesis is correct. It links the action taken in the study to the data you expect to see.</p>
+
+        <div class="phase-content">
+            <p><strong>Prediction:</strong><br>
+            **If** a student studies one set of flashcards using **retrieval practice** and a matching set of flashcards using **repeated rereading**, **then** the student will score a **higher percentage** on a final test for the retrieval practice material than for the rereading material.</p>
+        </div>
+
+        <h2>Experiment Design & Procedure</h2>
+        <p>The goal is now to test this prediction using a controlled, randomized study method.</p>
+
+        <h3>Design</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Group</th>
+                    <th>Study Method (Independent Variable)</th>
+                    <th>Expected Outcome (Dependent Variable)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>**Control**</td>
+                    <td>Repeated Rereading (Your current method)</td>
+                    <td>Lower score/freezing</td>
+                </tr>
+                <tr>
+                    <td>**Treatment**</td>
+                    <td>Retrieval Practice (Active Recall)</td>
+                    <td>Higher score/better recall</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Procedure</h3>
+        <ol>
+            <li class="procedure-step">**Preparation:** Divide the study material (e.g., 20 complex terms from a textbook chapter, two different historical timelines) into **Set A** and **Set B** of equal length and perceived difficulty.</li>
+            <li class="procedure-step">**Control (Rereading):** Study **Set A** by reading the material 4 times over a 30-minute session. Do not cover the answers or quiz yourself.</li>
+            <li class="procedure-step">**Treatment (Retrieval Practice):** Study **Set B** by reading the material once, then covering the answers and attempting to write everything you can remember from scratch for the remaining time. Repeat the recall/check/recall cycle 4 times over the same 30-minute session.</li>
+            <li class="procedure-step">**Delay:** Wait 48 hours (or 1 week, based on your course schedule) to simulate the delayed testing conditions of your observation.</li>
+            <li class="procedure-step">**Test:** Take a single, cumulative test on both Set A and Set B material. The test must require you to **write down answers from scratch** (simulating the type of exam where you freeze).</li>
+            <li class="procedure-step">**Measure:** Grade the test and calculate the percentage score for Set A (Rereading) and Set B (Retrieval Practice).</li>
+        </ol>
+        <p style="text-align: right; margin-top: 30px;">*(The next phase would be **Phase 6: Data Collection and Analysis**.)*</p>
+
+    </div>
+</body>
+</html>
