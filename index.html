@@ -2,40 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>PreMed Learning Science Lab</title>
+  <title>PreMed Learning Science Lab | UW-Parkside</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    /* ------------------------------------------------
+       UW-Parkside Brand Palette (Web Hex)
+       Primary: Green #016836, Black #21272
+       Secondary: Dark Green #00502f, Cool Grey #DBD9D6,
+                  Goldenrod #FABA31, White Birch #EFECE2
+       Accent (sparingly): Prairie Fire #FF4500
+       ------------------------------------------------ [attached_file:1]
+    */
     :root {
-      --bg: #050816;
-      --card: #111827;
-      --ink: #f9fafb;
-      --muted: #9ca3af;
-      --accent: #10b981;
-      --danger: #f97373;
+      --uwp-green: #016836;
+      --uwp-black: #21272;
+      --uwp-dark-green: #00502f;
+      --uwp-cool-grey: #dbd9d6;
+      --uwp-goldenrod: #faba31;
+      --uwp-white-birch: #efece2;
+      --uwp-accent-prairie-fire: #ff4500;
+
+      --bg: #f8fafc;
+      --ink: #111827;
+      --muted: #4b5563;
+
+      --card-bg: #ffffff;
+      --card-border: #e5e7eb;
+
+      --btn-primary-bg: var(--uwp-green);
+      --btn-primary-text: #ffffff;
+      --btn-secondary-bg: #ffffff;
+      --btn-secondary-text: var(--uwp-green);
+
+      --progress-track: var(--uwp-cool-grey);
+      --progress-bar: var(--uwp-green);
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #111827, #020617 55%);
+      background: linear-gradient(180deg, var(--uwp-white-birch), #ffffff);
       color: var(--ink);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
+
     header, footer {
       padding: 0.75rem 1rem;
-      background: rgba(15,23,42,0.9);
-      border-bottom: 1px solid #1f2937;
+      color: #ffffff;
     }
+
+    header {
+      background: linear-gradient(90deg, var(--uwp-dark-green), var(--uwp-green));
+      border-bottom: 4px solid var(--uwp-goldenrod);
+    }
+
     footer {
-      border-top: 1px solid #1f2937;
-      border-bottom: none;
+      background: var(--uwp-black);
+      border-top: 4px solid var(--uwp-green);
       margin-top: auto;
       font-size: 0.85rem;
-      color: var(--muted);
     }
-    header-inner, main-inner {
+
+    .shell {
       max-width: 960px;
       margin: 0 auto;
       display: flex;
@@ -43,12 +75,14 @@
       justify-content: space-between;
       gap: 1rem;
     }
+
     main {
       flex: 1;
       padding: 1rem;
       display: flex;
       justify-content: center;
     }
+
     .view {
       display: none;
       max-width: 960px;
@@ -58,88 +92,106 @@
     .view.active {
       display: block;
     }
+
     h1, h2, h3 {
       font-weight: 600;
       letter-spacing: 0.02em;
     }
-    h1 { font-size: 1.5rem; margin: 0; }
-    h2 { font-size: 1.3rem; margin-top: 0; }
+    h1 { font-size: 1.4rem; margin: 0; }
+    h2 { font-size: 1.35rem; margin-top: 0; color: var(--uwp-black); }
+    h3 { font-size: 1.1rem; margin-top: 0.5rem; color: var(--uwp-dark-green); }
     p { line-height: 1.5; }
 
+    .subline {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    /* Progress */
     .progress-shell {
       flex: 1;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      max-width: 360px;
-      margin-left: 1rem;
+      max-width: 340px;
+      margin-left: 0.5rem;
     }
     .progress-track {
       flex: 1;
       height: 8px;
       border-radius: 999px;
-      background: #111827;
+      background: var(--progress-track);
       overflow: hidden;
     }
     .progress-bar {
       height: 100%;
       width: 0%;
       border-radius: 999px;
-      background: linear-gradient(90deg,#22c55e,#0ea5e9);
+      background: var(--progress-bar);
       transition: width 0.3s ease;
     }
     .progress-label {
-      font-size: 0.85rem;
-      color: var(--muted);
+      font-size: 0.8rem;
       white-space: nowrap;
     }
 
+    /* Buttons */
     .btn {
-      border: none;
       border-radius: 999px;
-      padding: 0.5rem 1rem;
+      padding: 0.45rem 1rem;
       font-size: 0.9rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      background: var(--accent);
-      color: #022c22;
+      border: 1px solid transparent;
       font-weight: 500;
-      box-shadow: 0 0 0 1px rgba(15,23,42,0.6), 0 8px 18px rgba(15,118,110,0.45);
-      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+      transition: background 0.1s ease, color 0.1s ease, border-color 0.1s ease, transform 0.08s ease;
     }
-    .btn:hover {
+    .btn-primary {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: rgba(0,0,0,0.1);
+    }
+    .btn-primary:hover {
+      background: var(--uwp-dark-green);
       transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(15,118,110,0.6);
     }
-    .btn.secondary {
-      background: #1f2937;
-      color: var(--ink);
-      box-shadow: 0 0 0 1px #374151;
+    .btn-secondary {
+      background: var(--btn-secondary-bg);
+      color: var(--btn-secondary-text);
+      border-color: var(--uwp-green);
     }
-    .btn.danger {
-      background: var(--danger);
-      color: #111827;
-      box-shadow: 0 0 0 1px #7f1d1d;
+    .btn-secondary:hover {
+      background: var(--uwp-green);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .btn-danger {
+      background: #ffffff;
+      color: var(--uwp-black);
+      border-color: var(--uwp-accent-prairie-fire);
+    }
+    .btn-danger:hover {
+      background: var(--uwp-accent-prairie-fire);
+      color: #ffffff;
+      transform: translateY(-1px);
     }
     .btn:disabled {
       opacity: 0.4;
       cursor: default;
       transform: none;
-      box-shadow: 0 0 0 1px rgba(15,23,42,0.5);
     }
 
+    /* Cards & layout */
     .card {
-      background: radial-gradient(circle at top left, #111827, #020617);
-      border-radius: 1rem;
-      border: 1px solid rgba(148,163,184,0.2);
-      box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+      background: var(--card-bg);
+      border-radius: 0.75rem;
+      border: 1px solid var(--card-border);
       padding: 1.25rem 1.35rem;
+      box-shadow: 0 10px 24px rgba(33, 39, 42, 0.08);
     }
-    .card + .card {
-      margin-top: 1rem;
-    }
+    .card + .card { margin-top: 1rem; }
 
     .stack {
       display: flex;
@@ -149,37 +201,44 @@
 
     .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
       gap: 1rem;
       margin-top: 1rem;
     }
+
+    .meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
     .chip {
       display: inline-flex;
       align-items: center;
-      padding: 0.2rem 0.6rem;
+      padding: 0.15rem 0.6rem;
       border-radius: 999px;
       font-size: 0.75rem;
-      background: rgba(15,118,110,0.15);
-      color: #6ee7b7;
+      border: 1px solid var(--uwp-green);
+      color: var(--uwp-green);
+      background: #ffffff;
     }
     .chip.completed {
-      background: rgba(34,197,94,0.15);
-      color: #bbf7d0;
+      background: var(--uwp-green);
+      color: #ffffff;
     }
 
     textarea, input, select {
       width: 100%;
       border-radius: 0.6rem;
-      border: 1px solid #374151;
+      border: 1px solid #cbd5f5;
       padding: 0.6rem 0.7rem;
-      background: #020617;
+      background: #ffffff;
       color: var(--ink);
       font-size: 0.9rem;
       resize: vertical;
+      font-family: inherit;
     }
-    textarea {
-      min-height: 140px;
-    }
+    textarea { min-height: 140px; }
+
     label {
       display: block;
       font-size: 0.8rem;
@@ -188,13 +247,7 @@
       color: var(--muted);
       margin-bottom: 0.25rem;
     }
-    .field {
-      margin-bottom: 1rem;
-    }
-    .meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
+    .field { margin-bottom: 1rem; }
 
     .pill-nav {
       display: flex;
@@ -203,10 +256,24 @@
       margin-bottom: 1rem;
     }
 
+    .observation-box {
+      background: var(--uwp-white-birch);
+      border-radius: 0.65rem;
+      border: 1px solid #e5e7eb;
+      padding: 0.85rem 1rem;
+      font-style: italic;
+      color: #111827;
+    }
+
+    .banner {
+      border-left: 4px solid var(--uwp-green);
+      padding-left: 0.75rem;
+    }
+
     .hidden { display: none !important; }
 
     @media (max-width: 640px) {
-      header-inner, main-inner {
+      .shell {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -218,15 +285,16 @@
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <div class="header-inner" style="max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;">
+    <div class="shell">
       <div style="display:flex;align-items:center;gap:0.75rem;">
-        <div style="width:32px;height:32px;border-radius:999px;border:1px solid #22c55e;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:#a5b4fc;">
-          Δ
+        <div style="width:34px;height:34px;border-radius:50%;border:2px solid var(--uwp-goldenrod);display:flex;align-items:center;justify-content:center;font-size:0.9rem;background:#ffffff10;">
+          UWP
         </div>
         <div>
           <h1>PreMed Learning Science Lab</h1>
-          <div class="meta">Ten mini-experiments to rewire how you study.</div>
+          <div class="subline">University of Wisconsin–Parkside | Evidence-based study experiments.</div>
         </div>
       </div>
       <div class="progress-shell" aria-label="Overall progress">
@@ -236,46 +304,53 @@
         <div class="progress-label" id="globalProgressLabel">0% complete</div>
       </div>
       <div style="display:flex;gap:0.5rem;">
-        <button class="btn secondary" id="exportBtn" type="button">Export</button>
-        <button class="btn danger" id="resetBtn" type="button">Reset</button>
+        <button class="btn btn-secondary" id="exportBtn" type="button">Export</button>
+        <button class="btn btn-danger" id="resetBtn" type="button">Reset</button>
       </div>
     </div>
   </header>
 
+  <!-- Main -->
   <main>
+    <!-- Landing View -->
     <div class="view active" id="view-landing" aria-labelledby="landingTitle">
       <div class="card stack">
-        <div>
-          <h2 id="landingTitle">Why your study habits feel busy but not effective</h2>
+        <div class="banner">
+          <h2 id="landingTitle">When hard work does not match your exam scores</h2>
           <p>
-            You are putting in the hours—highlighting, rereading, rewriting. The pages look neat, the
-            effort feels real, and it seems like the right thing to do. But then the exam asks you to
-            recall concepts from scratch, and the results do not match the time you invested. [file:12]
+            You put in the hours—highlighting, rereading, rewriting. The pages look neat, the effort feels
+            real, and it seems like the right thing to do. But when the exam asks you to recall concepts
+            from scratch, the results do not match the time you invested. [file:12]
           </p>
           <p>
-            This lab turns you into a scientist of your own learning. In ten short experiments, you will
-            contrast your current habits with evidence from cognitive science, make predictions, and run
-            small trials in your actual courses. [file:12]
+            This lab, designed for PreMed students at UW–Parkside, turns you into a scientist of your own
+            learning. In ten short experiments, you will contrast your study habits with cognitive science
+            research, make predictions, and run small trials in your real courses. [file:12][attached_file:1]
           </p>
         </div>
         <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
-          <button class="btn" type="button" data-nav="dashboard">Begin your study transformation</button>
-          <button class="btn secondary" type="button" data-nav="roadmap">Peek at the roadmap</button>
+          <button class="btn btn-primary" type="button" data-nav="dashboard">
+            Begin your study transformation
+          </button>
+          <button class="btn btn-secondary" type="button" data-nav="roadmap">
+            Peek at the roadmap
+          </button>
         </div>
       </div>
     </div>
 
+    <!-- Dashboard View -->
     <div class="view" id="view-dashboard" aria-labelledby="dashboardTitle">
       <div class="card stack">
         <div>
           <h2 id="dashboardTitle">Your experiment deck</h2>
           <p class="meta">
-            Complete experiments in any order. Each one takes about 10–15 minutes and ends with a
-            concrete change you can test in a real course. [file:12]
+            Complete experiments in any order. Each takes about 10–15 minutes and ends with a concrete
+            change you can test in a real UWP course. [file:12][attached_file:1]
           </p>
         </div>
         <div class="dashboard-grid">
-          <!-- Skeleton: only Active Recall Arena card wired up for now -->
+          <!-- Active Recall Arena -->
           <article class="card" data-experiment-card="activerecallarena">
             <h3>Active Recall Arena</h3>
             <p class="meta">
@@ -284,7 +359,7 @@
             </p>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem;">
               <span class="chip" id="chip-activerecallarena">Not started</span>
-              <button class="btn secondary" type="button" data-open-experiment="activerecallarena">
+              <button class="btn btn-secondary" type="button" data-open-experiment="activerecallarena">
                 Open
               </button>
             </div>
@@ -293,19 +368,22 @@
           <!-- Placeholder cards for future experiments -->
           <article class="card">
             <h3>Spacing vs Cramming</h3>
-            <p class="meta">Stub card for future experiment implementation.</p>
+            <p class="meta">Placeholder for a future experiment on distributed vs massed practice.</p>
           </article>
           <article class="card">
             <h3>Interleaving Gauntlet</h3>
-            <p class="meta">Stub card for future experiment implementation.</p>
+            <p class="meta">Placeholder for a future experiment on mixed vs blocked practice sets.</p>
           </article>
         </div>
       </div>
     </div>
 
+    <!-- Experiment View (Active Recall Arena) -->
     <div class="view" id="view-experiment" aria-labelledby="experimentTitle">
       <div class="pill-nav">
-        <button class="btn secondary" type="button" data-nav="dashboard">&larr; Back to dashboard</button>
+        <button class="btn btn-secondary" type="button" data-nav="dashboard">
+          &larr; Back to dashboard
+        </button>
       </div>
       <div class="card stack">
         <header>
@@ -316,31 +394,29 @@
           </p>
         </header>
 
-        <!-- Phase 1: Observation and personal reflection -->
+        <!-- Phase 1 -->
         <section aria-labelledby="phase1Title">
           <h3 id="phase1Title">Phase 1 — Recognition vs recall</h3>
-          <div class="card" style="background:rgba(15,23,42,0.9);border-color:#334155;">
-            <p style="font-style:italic;">
-              “My go-to study method is to read my notes and the textbook over and over. It feels
-              comfortable, and I start to recognize the material. But when the exam asks me to write
-              answers from scratch, I freeze. My Cs tell me recognition is not enough.” [file:12]
-            </p>
+          <div class="observation-box">
+            “My go-to study method is to read my notes and the textbook over and over. It feels
+            comfortable, and I start to recognize the material. But when the exam asks me to write answers
+            from scratch, I freeze. My Cs tell me recognition is not enough.” [file:12]
           </div>
           <div class="field">
             <label for="reflectionText">Pause for personal reflection</label>
             <p class="meta">
-              Think about your last major exam. How did you prepare? How did it feel in the moment?
-              What actually happened on the test? Try to write at least 100 words. [file:12]
+              Think about your last major exam. How did you prepare? How did it feel in the moment? What
+              actually happened on the test? Try to write at least 100 words. [file:12]
             </p>
             <textarea id="reflectionText" placeholder="Type your honest reflection here..."></textarea>
             <div class="meta" id="reflectionMeta">0 / 100 words</div>
           </div>
-          <button class="btn" type="button" id="reflectionContinueBtn" disabled>
+          <button class="btn btn-primary" type="button" id="reflectionContinueBtn" disabled>
             I have reflected — continue
           </button>
         </section>
 
-        <!-- Phase 2–3: Curiosity, research question, hypothesis, prediction -->
+        <!-- Phase 2–3 -->
         <section id="phase2plus" class="hidden" aria-labelledby="phase2Title">
           <h3 id="phase2Title">Phase 2 — Curiosity and research question</h3>
           <p>
@@ -354,9 +430,9 @@
 
           <h3>Phase 3 — Your prediction</h3>
           <p>
-            Hypothesis (research version): Retrieval practice (independent variable) leads to higher
-            delayed test performance (dependent variable) than repeated rereading when study time and
-            materials are held constant (control variables). [file:12]
+            Hypothesis: Retrieval practice (independent variable) leads to higher delayed test performance
+            (dependent variable) than repeated rereading when study time and materials are held constant
+            (control variables). [file:12]
           </p>
           <div class="field">
             <label for="predictionChoice">Which strategy do you predict will win on a delayed test?</label>
@@ -371,23 +447,24 @@
             <label for="predictionConfidence">How confident are you in this prediction? (1–5)</label>
             <input id="predictionConfidence" type="number" min="1" max="5" />
           </div>
-          <button class="btn" type="button" id="predictionContinueBtn" disabled>
+          <button class="btn btn-primary" type="button" id="predictionContinueBtn" disabled>
             Lock in my prediction
           </button>
         </section>
 
-        <!-- Placeholder for later phases (design, results, personal experiment, etc.) -->
+        <!-- Placeholder for later phases -->
         <section id="phasePlaceholder" class="hidden">
           <h3>Next phases coming soon</h3>
           <p class="meta">
             This skeleton focuses on navigation, Phase 1–3, and state persistence. Additional phases
-            (experimental design, results, personal experiment planner, deep‑dive article link, and
-            completion toggle) can plug into the same pattern. [file:12]
+            (experimental design, results, personal experiment planner, article link, completion) can
+            attach to the same pattern. [file:12]
           </p>
         </section>
       </div>
     </div>
 
+    <!-- Roadmap View -->
     <div class="view" id="view-roadmap" aria-labelledby="roadmapTitle">
       <div class="card stack">
         <h2 id="roadmapTitle">Your future study roadmap</h2>
@@ -398,22 +475,29 @@
         </p>
         <p class="meta">
           For now, this is a placeholder so you can wire up navigation and localStorage. The final version
-          will read from your experiment data to generate recommendations. [file:12]
+          will read from your experiment data to generate UWP‑specific recommendations and handouts you can
+          share in Canvas. [file:12][attached_file:1]
         </p>
       </div>
     </div>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <div class="footer-inner" style="max-width:960px;margin:0 auto;">
-      Your inputs are stored only in your browser via localStorage. No accounts, no tracking, no data is
-      sent to a server. [file:12]
+    <div class="shell" style="flex-direction:column;align-items:flex-start;">
+      <div>
+        Your inputs are stored only in your browser via localStorage. No accounts, no tracking, and no data
+        is sent to a server. [file:12]
+      </div>
+      <div style="margin-top:0.35rem;font-size:0.8rem;">
+        Designed for UW–Parkside students using official Parkside colors to support a consistent learning
+        experience. [attached_file:1]
+      </div>
     </div>
   </footer>
 
   <script>
     // ---------- STATE & LOCALSTORAGE ----------
-
     const STORAGE_KEY = "premedStudyLab";
 
     const defaultState = {
@@ -427,7 +511,6 @@
           predictionConfidence: "",
           completedDate: null
         }
-        // future experiments: spacing, interleaving, etc.
       },
       roadmap: {
         peakTime: "",
@@ -445,7 +528,7 @@
         const parsed = JSON.parse(raw);
         return { ...structuredClone(defaultState), ...parsed };
       } catch (e) {
-        console.warn("Failed to parse stored state, resetting.", e);
+        console.warn("Failed to parse stored state; resetting.", e);
         return structuredClone(defaultState);
       }
     }
@@ -458,8 +541,7 @@
 
     let state = loadState();
 
-    // ---------- VIEW NAVIGATION ----------
-
+    // ---------- VIEW NAV ----------
     const views = {
       landing: document.getElementById("view-landing"),
       dashboard: document.getElementById("view-dashboard"),
@@ -469,11 +551,7 @@
 
     function showView(name) {
       Object.entries(views).forEach(([key, el]) => {
-        if (key === name) {
-          el.classList.add("active");
-        } else {
-          el.classList.remove("active");
-        }
+        el.classList.toggle("active", key === name);
       });
       if (name === "experiment" && state.lastViewedExperimentId === "activerecallarena") {
         hydrateExperimentUI();
@@ -487,7 +565,6 @@
       });
     });
 
-    // Dashboard card navigation for Active Recall Arena
     document.querySelectorAll("[data-open-experiment]").forEach(btn => {
       btn.addEventListener("click", () => {
         const id = btn.getAttribute("data-open-experiment");
@@ -497,8 +574,7 @@
       });
     });
 
-    // ---------- PROGRESS UI ----------
-
+    // ---------- PROGRESS ----------
     const progressBar = document.getElementById("globalProgressBar");
     const progressLabel = document.getElementById("globalProgressLabel");
 
@@ -532,8 +608,7 @@
       }
     }
 
-    // ---------- EXPERIMENT: ACTIVE RECALL ARENA ----------
-
+    // ---------- EXPERIMENT: ACTIVE RECALL ----------
     const reflectionTextEl = document.getElementById("reflectionText");
     const reflectionMetaEl = document.getElementById("reflectionMeta");
     const reflectionContinueBtn = document.getElementById("reflectionContinueBtn");
@@ -551,7 +626,6 @@
       const exp = state.experiments.activerecallarena;
       if (!exp) return;
 
-      // Reflection
       reflectionTextEl.value = exp.personalReflection || "";
       reflectionMetaEl.textContent = (exp.reflectionWordCount || 0) + " / 100 words";
       if ((exp.reflectionWordCount || 0) >= 100) {
@@ -562,7 +636,6 @@
         phase2plusEl.classList.add("hidden");
       }
 
-      // Prediction
       predictionChoiceEl.value = exp.predictionChoice || "";
       predictionConfidenceEl.value = exp.predictionConfidence || "";
       if (exp.predictionChoice && exp.predictionConfidence) {
@@ -581,18 +654,12 @@
       const exp = state.experiments.activerecallarena;
       exp.personalReflection = text;
       exp.reflectionWordCount = words;
-      if (words >= 100) {
-        reflectionContinueBtn.disabled = false;
-      } else {
-        reflectionContinueBtn.disabled = true;
-      }
+      reflectionContinueBtn.disabled = words < 100;
       saveState();
     });
 
     reflectionContinueBtn.addEventListener("click", () => {
       phase2plusEl.classList.remove("hidden");
-      // Simple focus move
-      phase2plusEl.querySelector("h3")?.focus?.();
     });
 
     function validatePredictionInputs() {
@@ -620,13 +687,12 @@
 
     predictionContinueBtn.addEventListener("click", () => {
       phasePlaceholderEl.classList.remove("hidden");
-      // For now we do not mark the experiment complete; that will happen after later phases.
+      // Later, when all phases are complete, you can set exp.completed = true and saveState()
     });
 
     // ---------- EXPORT & RESET ----------
-
     document.getElementById("resetBtn").addEventListener("click", () => {
-      const ok = confirm("This will clear all your saved reflections and progress on this device. Continue?");
+      const ok = confirm("This will clear all saved reflections and progress on this device. Continue?");
       if (!ok) return;
       localStorage.removeItem(STORAGE_KEY);
       state = loadState();
@@ -638,7 +704,7 @@
 
     document.getElementById("exportBtn").addEventListener("click", () => {
       const exp = state.experiments.activerecallarena;
-      let text = "PreMed Learning Science Lab — Reflections Export\n\n";
+      let text = "PreMed Learning Science Lab — Reflections Export (UW–Parkside)\n\n";
       text += "Active Recall Arena\n";
       text += "--------------------\n";
       text += "Personal reflection:\n" + (exp.personalReflection || "[none]") + "\n\n";
@@ -648,19 +714,19 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "premed-study-lab-reflections.txt";
+      a.download = "uwp-premed-study-lab-reflections.txt";
       document.body.appendChild(a);
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
     });
 
-    // ---------- INITIALIZE ----------
-
+    // ---------- INIT ----------
     updateGlobalProgressUI();
     updateExperimentChips();
     if (state.lastViewedExperimentId === "activerecallarena") {
       hydrateExperimentUI();
+      showView("experiment");
     }
   </script>
 </body>
