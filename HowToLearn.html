@@ -346,7 +346,7 @@
           <p>
             This lab, designed for PreMed students at UW–Parkside, turns you into a scientist of your own
             learning. In ten short experiments, you will contrast your study habits with cognitive science
-            research, make predictions, and run small trials in your real courses. [attached_file:1]
+            research, make predictions, and run small trials in your real courses.
           </p>
         </div>
         <div style="display:flex;gap:0.4rem;flex-wrap:wrap;align-items:center;">
@@ -366,7 +366,7 @@
           <h2 id="dashboardTitle">Your experiment deck</h2>
           <p class="meta">
             Complete experiments in any order. Each takes about 10–15 minutes and ends with a concrete
-            change you can test in a real UWP course. [attached_file:1]
+            change you can test in a real UWP course.
           </p>
         </div>
         <div class="dashboard-grid">
@@ -433,7 +433,7 @@
           </button>
         </section>
 
-        <section id="phase2plus" class="hidden" aria-labelledby="phase2Title">
+        <section id="phase2plus" aria-labelledby="phase2Title">
           <h3 id="phase2Title">Phase 2: Curiosity</h3>
           <p class="meta" style="color:#000000; font-style: italic;">
             Explanation: Curiosity is a broad, open-ended question that emerges directly from the core of your personal observation. It explores the *why*—the underlying reason your current study method (rereading/recognition) is failing to produce the desired outcome (good grades/retrieval).
@@ -451,7 +451,7 @@
           </button>
         </section>
 
-        <section id="phase3plus" class="hidden" aria-labelledby="phase3Title">
+        <section id="phase3plus" aria-labelledby="phase3Title">
           <h3 id="phase3Title">Phase 3: Research Question</h3>
           <p class="meta" style="color:#000000; font-style: italic;">
             Explanation: The Research Question is a specific, focused, and testable refinement of your broad Curiosity. It guides the design of the experiment by asking for a measurable comparison between two different conditions. For this experiment, we compare your current method (Rereading) against the alternative suggested by the learning science literature (Retrieval Practice).
@@ -465,7 +465,7 @@
           </button>
         </section>
 
-        <section id="phase4plus" class="hidden" aria-labelledby="phase4Title">
+        <section id="phase4plus" aria-labelledby="phase4Title">
           <h3 id="phase4Title">Phase 4: Critical Hypothesis</h3>
           <p class="meta" style="color:#000000; font-style: italic;">
             Explanation: A hypothesis is an educated, testable prediction that attempts to answer the research question. It identifies the Independent Variable (the study method) and the Dependent Variable (the test score) and posits a clear relationship. The *critical* part is predicting which method will be *more* effective.
@@ -491,7 +491,7 @@
           </button>
         </section>
 
-        <section id="phase5plus" class="hidden" aria-labelledby="phase5Title">
+        <section id="phase5plus" aria-labelledby="phase5Title">
           <h3 id="phase5Title">Phase 5: (If....Then) Prediction</h3>
           <p class="meta" style="color:#000000; font-style: italic;">
             Explanation: The final prediction is a precise, measurable statement of the expected outcome of the experiment, assuming your Hypothesis is correct. It links the action taken in the study to the data you expect to see.
@@ -555,7 +555,7 @@
         <p class="meta">
           For now, this is a placeholder so you can wire up navigation and localStorage. The final version
           will read from your experiment data to generate UWP‑specific recommendations and handouts you can
-          share in Canvas. [attached_file:1]
+          share in Canvas.
         </p>
       </div>
     </div>
@@ -569,14 +569,13 @@
       </div>
       <div style="font-size:0.75rem;">
         Designed for UW–Parkside students using official Parkside colors to support a consistent learning
-        experience. [attached_file:1]
+        experience.
       </div>
     </div>
   </footer>
 
   <script>
     const STORAGE_KEY = "premedStudyLab";
-    // *** Word count minimum changed from 100 to 50
     const WORD_COUNT_MIN = 50; 
 
     const defaultState = {
@@ -586,8 +585,8 @@
           completed: false,
           personalReflection: "",
           reflectionWordCount: 0,
-          curiosityQuestion: "", // New field for Phase 2 input
-          curiosityWordCount: 0, // New field for Phase 2 word count
+          curiosityQuestion: "", 
+          curiosityWordCount: 0, 
           predictionChoice: "",
           predictionConfidence: "",
           completedDate: null
@@ -607,7 +606,10 @@
         const raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) return structuredClone(defaultState);
         const parsed = JSON.parse(raw);
-        return { ...structuredClone(defaultState), ...parsed };
+        // Ensure new fields are added if loading an old state
+        return { ...structuredClone(defaultState), ...parsed, 
+          experiments: { ...structuredClone(defaultState).experiments, ...parsed.experiments }
+        };
       } catch (e) {
         return structuredClone(defaultState);
       }
@@ -677,7 +679,7 @@
       if (exp.completed) {
         chip.textContent = "Completed";
         chip.classList.add("completed");
-      } else if (exp.personalReflection || exp.predictionChoice) {
+      } else if (exp.personalReflection || exp.curiosityQuestion || exp.predictionChoice) {
         chip.textContent = "In progress";
         chip.classList.remove("completed");
       } else {
@@ -694,15 +696,12 @@
     const curiosityMetaEl = document.getElementById("curiosityMeta");
     const curiosityContinueBtn = document.getElementById("curiosityContinueBtn");
 
-    const phase2plusEl = document.getElementById("phase2plus");
-    const phase3plusEl = document.getElementById("phase3plus");
     const researchQuestionContinueBtn = document.getElementById("researchQuestionContinueBtn");
-    const phase4plusEl = document.getElementById("phase4plus");
 
     const predictionChoiceEl = document.getElementById("predictionChoice");
     const predictionConfidenceEl = document.getElementById("predictionConfidence");
     const predictionContinueBtn = document.getElementById("predictionContinueBtn");
-    const phase5plusEl = document.getElementById("phase5plus");
+    
     const experimentCompleteBtn = document.getElementById("experimentCompleteBtn");
 
 
@@ -716,47 +715,24 @@
       
       // Phase 1: Reflection
       reflectionTextEl.value = exp.personalReflection || "";
-      reflectionMetaEl.textContent = (exp.reflectionWordCount || 0) + " / " + WORD_COUNT_MIN + " words";
-      if ((exp.reflectionWordCount || 0) >= WORD_COUNT_MIN) {
-        reflectionContinueBtn.disabled = false;
-        phase2plusEl.classList.remove("hidden");
-      } else {
-        reflectionContinueBtn.disabled = true;
-        phase2plusEl.classList.add("hidden");
-      }
+      let words1 = countWords(exp.personalReflection || "");
+      reflectionMetaEl.textContent = words1 + " / " + WORD_COUNT_MIN + " words";
+      reflectionContinueBtn.disabled = words1 < WORD_COUNT_MIN;
       
       // Phase 2: Curiosity
       curiosityTextEl.value = exp.curiosityQuestion || "";
-      curiosityMetaEl.textContent = (exp.curiosityWordCount || 0) + " / " + WORD_COUNT_MIN + " words";
-      if ((exp.curiosityWordCount || 0) >= WORD_COUNT_MIN) {
-        curiosityContinueBtn.disabled = false;
-        phase3plusEl.classList.remove("hidden");
-      } else {
-        curiosityContinueBtn.disabled = true;
-        phase3plusEl.classList.add("hidden");
-      }
+      let words2 = countWords(exp.curiosityQuestion || "");
+      curiosityMetaEl.textContent = words2 + " / " + WORD_COUNT_MIN + " words";
+      curiosityContinueBtn.disabled = words2 < WORD_COUNT_MIN;
 
-      // Phase 3 is passive display, continues if Phase 2 is complete
-      if (!phase3plusEl.classList.contains("hidden")) {
-        phase4plusEl.classList.remove("hidden");
-      } else {
-        phase4plusEl.classList.add("hidden");
-      }
-      
       // Phase 4: Hypothesis
       predictionChoiceEl.value = exp.predictionChoice || "";
       predictionConfidenceEl.value = exp.predictionConfidence || "";
-      if (exp.predictionChoice && exp.predictionConfidence) {
-        predictionContinueBtn.disabled = false;
-        phase5plusEl.classList.remove("hidden");
-      } else {
-        predictionContinueBtn.disabled = true;
-        phase5plusEl.classList.add("hidden");
-      }
+      validatePredictionInputs();
       
       // Experiment is complete if this button was previously clicked.
       if (exp.completed) {
-        // You might want to lock down inputs here if it's completed
+        // Future: lock inputs if complete
       }
     }
 
@@ -772,7 +748,9 @@
     });
 
     reflectionContinueBtn.addEventListener("click", () => {
-      phase2plusEl.classList.remove("hidden");
+      // Logic for moving forward is handled by the visual hierarchy now being displayed
+      // We keep this to trigger state changes/saves if needed later
+      saveState();
     });
     
     curiosityTextEl.addEventListener("input", () => {
@@ -787,11 +765,13 @@
     });
 
     curiosityContinueBtn.addEventListener("click", () => {
-      phase3plusEl.classList.remove("hidden");
+      // Logic for moving forward is handled by the visual hierarchy now being displayed
+      saveState();
     });
 
     researchQuestionContinueBtn.addEventListener("click", () => {
-      phase4plusEl.classList.remove("hidden");
+      // Logic for moving forward is handled by the visual hierarchy now being displayed
+      saveState();
     });
 
     function validatePredictionInputs() {
@@ -818,16 +798,16 @@
     });
 
     predictionContinueBtn.addEventListener("click", () => {
-      phase5plusEl.classList.remove("hidden");
+      // Logic for moving forward is handled by the visual hierarchy now being displayed
+      saveState();
     });
     
     experimentCompleteBtn.addEventListener("click", () => {
-        // This is where you would move to Phase 6: Data Collection
         alert("Experiment 1 (Phases 1-5) is complete! Proceed to Phase 6: Data Collection and Analysis.");
-        // Optional: mark experiment as completed for progress bar/chip
-        // state.experiments.activerecallarena.completed = true;
-        // state.experiments.activerecallarena.completedDate = new Date().toISOString();
-        // saveState();
+        state.experiments.activerecallarena.completed = true;
+        state.experiments.activerecallarena.completedDate = new Date().toISOString();
+        saveState();
+        showView("dashboard");
     });
 
     document.getElementById("resetBtn").addEventListener("click", () => {
