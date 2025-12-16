@@ -7,7 +7,7 @@
   <style>
     :root {
       --uwp-green: #016836;
-      --uwp-black: #21272;
+      --uwp-black: #21272a;
       --uwp-dark-green: #00502f;
       --uwp-cool-grey: #dbd9d6;
       --uwp-goldenrod: #faba31;
@@ -162,7 +162,6 @@
       color: #ffffff;
       transform: translateY(-1px);
     }
-    /* Reset styling per request */
     .btn-danger {
       background: #ff0000;
       color: #ffffff;
@@ -227,7 +226,7 @@
     textarea, input, select {
       width: 100%;
       border-radius: 0.4rem;
-      border: 1px solid #cbd5f5;
+      border: 1px solid #cbd5e1;
       padding: 0.45rem 0.5rem;
       background: #ffffff;
       color: #000000;
@@ -243,7 +242,7 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #000000; /* pure black for readability */
+      color: #000000;
       margin-bottom: 0.15rem;
     }
 
@@ -266,6 +265,15 @@
       margin-bottom: 0.35rem;
     }
 
+    .explanation-box {
+      background: #f0f9ff;
+      border-left: 3px solid var(--uwp-green);
+      border-radius: 0.3rem;
+      padding: 0.5rem 0.6rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
     .banner {
       border-left: 3px solid var(--uwp-green);
       padding-left: 0.5rem;
@@ -277,23 +285,6 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 0.2rem;
-    }
-
-    /* Added styling for the procedure section */
-    .procedure-table th, .procedure-table td {
-        border: 1px solid var(--uwp-cool-grey);
-        padding: 8px;
-        text-align: left;
-    }
-    .procedure-table th {
-        background-color: #eef2f6;
-        color: var(--ink);
-    }
-    .procedure-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 0.5rem 0;
-        font-size: 0.9em;
     }
 
     @media (max-width: 640px) {
@@ -334,6 +325,7 @@
   </header>
 
   <main>
+    <!-- Landing -->
     <div class="view active" id="view-landing" aria-labelledby="landingTitle">
       <div class="card stack">
         <div class="banner">
@@ -360,6 +352,7 @@
       </div>
     </div>
 
+    <!-- Dashboard -->
     <div class="view" id="view-dashboard" aria-labelledby="dashboardTitle">
       <div class="card stack">
         <div>
@@ -396,6 +389,7 @@
       </div>
     </div>
 
+    <!-- Experiment -->
     <div class="view" id="view-experiment" aria-labelledby="experimentTitle">
       <div class="pill-nav">
         <button class="btn btn-secondary" type="button" data-nav="dashboard">
@@ -411,19 +405,27 @@
           </p>
         </header>
 
+        <!-- PHASE 1: Recognition & Reflection -->
         <section aria-labelledby="phase1Title">
-          <h3 id="phase1Title">Phase 1: Observation</h3>
-          <p class="meta" style="color:#000000; font-style: italic;">
-            Explanation: This is your initial, personal reflection on your current study habits and academic performance. It is the necessary starting point for the scientific process, providing the real-world problem that this experiment will attempt to solve using learning science.
-          </p>
+          <h3 id="phase1Title">Phase 1 — Recognition vs recall</h3>
+          <div class="explanation-box">
+            <strong>What this phase is about:</strong> Before we dive into research, we want to hear from you. 
+            Many students feel they study "correctly" but still struggle on exams. This phase asks you to honestly 
+            reflect on your own experience—what you do, how it feels, and what results you get. There are no right 
+            or wrong answers here; this is your baseline.
+          </div>
           <div class="observation-box">
-            “My go-to study method is to read my notes and the textbook over and over. It feels comfortable and familiar, and after a few passes, I start to recognize the material. But when I'm in the exam and have to write down answers from scratch, I freeze. I realize I never actually practiced retrieving the information on my own. I've been recognizing things instead of really learning them, and my C grades show it.”
+            "My go-to study method is to read my notes and the textbook over and over. It feels comfortable and 
+            familiar, and after a few passes, I start to recognize the material. But when I'm in the exam and 
+            have to write down answers from scratch, I freeze. I realize I never actually practiced retrieving 
+            the information on my own. I've been recognizing things instead of really learning them, and my C 
+            grades show it."
           </div>
           <div class="field">
             <label for="reflectionText">Pause for personal reflection</label>
             <p class="meta" style="color:#000000;">
               Think about your last major exam. How did you prepare? How did it feel in the moment? What
-              actually happened on the test? (a minimum of 50 words)
+              actually happened on the test? Try to write a minimum of 50 words.
             </p>
             <textarea id="reflectionText" placeholder="Type your honest reflection here..."></textarea>
             <div class="meta" id="reflectionMeta">0 / 50 words</div>
@@ -433,45 +435,73 @@
           </button>
         </section>
 
-        <section id="phase2plus" aria-labelledby="phase2Title">
-          <h3 id="phase2Title">Phase 2: Curiosity</h3>
-          <p class="meta" style="color:#000000; font-style: italic;">
-            Explanation: Curiosity is a broad, open-ended question that emerges directly from the core of your personal observation. It explores the *why*—the underlying reason your current study method (rereading/recognition) is failing to produce the desired outcome (good grades/retrieval).
-          </p>
-          <p>
-            Example Curiosity Question: *Why does the comfortable feeling of simply recognizing material during study sessions not translate into the ability to recall that information on a high-stakes exam?*
-          </p>
-          <div class="field">
-            <label for="curiosityText">Student Input Required: Please input your own Curiosity Question based on your observation (a minimum of 50 words):</label>
-            <textarea id="curiosityText" placeholder="Enter your Curiosity Question here..."></textarea>
-            <div class="meta" id="curiosityMeta">0 / 50 words</div>
+        <!-- PHASE 2: Curiosity -->
+        <section id="phase2" class="hidden" aria-labelledby="phase2Title">
+          <h3 id="phase2Title">Phase 2 — Curiosity</h3>
+          <div class="explanation-box">
+            <strong>What this phase is about:</strong> Good science starts with genuine curiosity. Now that 
+            you've reflected on your habits, we present a simple "what if" question that students often wonder 
+            about but rarely test systematically. This curiosity question will guide the rest of our investigation.
           </div>
-          <button class="btn btn-primary" type="button" id="curiosityContinueBtn" disabled>
-            Lock in my Curiosity Question
+          <p>
+            Curiosity question: <strong>What would happen if I tested myself on the material instead of
+            just rereading it?</strong>
+          </p>
+          <button class="btn btn-primary" type="button" id="curiosityContinueBtn">
+            Continue to research question
           </button>
         </section>
 
-        <section id="phase3plus" aria-labelledby="phase3Title">
-          <h3 id="phase3Title">Phase 3: Research Question</h3>
-          <p class="meta" style="color:#000000; font-style: italic;">
-            Explanation: The Research Question is a specific, focused, and testable refinement of your broad Curiosity. It guides the design of the experiment by asking for a measurable comparison between two different conditions. For this experiment, we compare your current method (Rereading) against the alternative suggested by the learning science literature (Retrieval Practice).
-          </p>
+        <!-- PHASE 3: Research Question -->
+        <section id="phase3" class="hidden" aria-labelledby="phase3Title">
+          <h3 id="phase3Title">Phase 3 — Research Question</h3>
+          <div class="explanation-box">
+            <strong>What this phase is about:</strong> Scientists turn curiosity into testable research questions. 
+            A good research question is precise, measurable, and focuses on comparing two clear conditions. Here's 
+            how researchers framed your "what if" as a formal question they could actually study in experiments.
+          </div>
           <p>
-            <strong>Research Question:</strong> Is **retrieval practice (active recall)** a more effective study method for long-term retention and performance on exams requiring written answers than **repeated rereading (passive study)**?
+            Research question: <strong>Does retrieval practice (self-testing) produce better long-term
+            retention than repeated rereading when studying course material?</strong>
           </p>
-
-          <button class="btn btn-primary" type="button" id="researchQuestionContinueBtn">
-            I understand the Research Question — continue
+          <button class="btn btn-primary" type="button" id="researchContinueBtn">
+            Continue to hypothesis
           </button>
         </section>
 
-        <section id="phase4plus" aria-labelledby="phase4Title">
-          <h3 id="phase4Title">Phase 4: Critical Hypothesis</h3>
-          <p class="meta" style="color:#000000; font-style: italic;">
-            Explanation: A hypothesis is an educated, testable prediction that attempts to answer the research question. It identifies the Independent Variable (the study method) and the Dependent Variable (the test score) and posits a clear relationship. The *critical* part is predicting which method will be *more* effective.
-          </p>
+        <!-- PHASE 4: Hypothesis -->
+        <section id="phase4" class="hidden" aria-labelledby="phase4Title">
+          <h3 id="phase4Title">Phase 4 — Hypothesis</h3>
+          <div class="explanation-box">
+            <strong>What this phase is about:</strong> A hypothesis is an educated guess about what the answer 
+            will be, stated in terms of variables. The <strong>Independent Variable (IV)</strong> is what we 
+            manipulate (retrieval practice vs rereading). The <strong>Dependent Variable (DV)</strong> is what 
+            we measure (test performance). <strong>Control Variables (CV)</strong> are what we keep the same 
+            (study time, materials) so we know any difference is due to the IV, not other factors.
+          </div>
           <p>
-            <strong>Your Hypothesis:</strong> The use of **retrieval practice (active recall)** will result in a significantly better delayed test performance and higher retention than the use of **repeated rereading** for the same study material.
+            Hypothesis: <strong>Retrieval practice</strong> (IV: independent variable) leads to higher 
+            <strong>delayed test performance</strong> (DV: dependent variable) than repeated rereading (IV) 
+            when <strong>study time and materials are held constant</strong> (CV: control variables).
+          </p>
+          <button class="btn btn-primary" type="button" id="hypothesisContinueBtn">
+            Continue to prediction
+          </button>
+        </section>
+
+        <!-- PHASE 5: Prediction (If...Then) -->
+        <section id="phase5" class="hidden" aria-labelledby="phase5Title">
+          <h3 id="phase5Title">Phase 5 — Your Prediction (If...Then)</h3>
+          <div class="explanation-box">
+            <strong>What this phase is about:</strong> Before we show you the research results, we want YOUR 
+            prediction. An "If...Then" prediction forces you to commit to an expected outcome. This creates 
+            cognitive engagement—you'll be more invested in seeing whether you were right or surprised. Be honest 
+            about what you actually think will happen.
+          </div>
+          <p>
+            If-then prediction: <strong>If I use retrieval practice (self-testing) instead of repeated 
+            rereading while keeping study time constant (CV), then my exam performance (DV) will be 
+            significantly higher.</strong>
           </p>
           <div class="field">
             <label for="predictionChoice">Which strategy do you predict will win on a delayed test?</label>
@@ -487,74 +517,165 @@
             <input id="predictionConfidence" type="number" min="1" max="5" />
           </div>
           <button class="btn btn-primary" type="button" id="predictionContinueBtn" disabled>
-            Lock in my Hypothesis
+            Lock in my prediction
           </button>
         </section>
 
-        <section id="phase5plus" aria-labelledby="phase5Title">
-          <h3 id="phase5Title">Phase 5: (If....Then) Prediction</h3>
-          <p class="meta" style="color:#000000; font-style: italic;">
-            Explanation: The final prediction is a precise, measurable statement of the expected outcome of the experiment, assuming your Hypothesis is correct. It links the action taken in the study to the data you expect to see.
-          </p>
+        <!-- PHASE 6: Experimental Design -->
+        <section id="phase6" class="hidden" aria-labelledby="phase6Title">
+          <h3 id="phase6Title">Phase 6 — Experimental Design</h3>
+          <div class="explanation-box">
+            <strong>What this phase is about:</strong> Now we show you exactly how researchers tested this 
+            question. Pay attention to how they set up the comparison—what each group did, what they measured, 
+            and what they controlled. This is the recipe that produced the evidence you're about to see.
+          </div>
+          <p><strong>The Study (Roediger & Karpicke, 2006):</strong></p>
           <p>
-            <strong>Prediction:</strong> **If** a student studies one set of flashcards using **retrieval practice** and a matching set of flashcards using **repeated rereading**, **then** the student will score a **higher percentage** on a final test for the retrieval practice material than for the rereading material.
+            Students study a prose passage. One group <strong>reads the passage four times</strong> (IV: massed 
+            reading). Another group <strong>reads once, then takes three practice tests with no feedback</strong> 
+            (IV: retrieval practice). Both groups spend <em>equal study time</em> (CV). One week later, all 
+            students take a <strong>final retention test</strong> (DV) with short-answer questions about the passage.
           </p>
-          
-          <h3 style="margin-top: 1.5rem;">Experiment Design & Procedure</h3>
-          <p>The goal is now to test this prediction using a controlled, randomized study method.</p>
-
-          <h4>Design</h4>
-          <table class="procedure-table">
-              <thead>
-                  <tr>
-                      <th>Group</th>
-                      <th>Study Method (Independent Variable)</th>
-                      <th>Expected Outcome (Dependent Variable)</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td>**Control**</td>
-                      <td>Repeated Rereading (Your current method)</td>
-                      <td>Lower score/freezing</td>
-                  </tr>
-                  <tr>
-                      <td>**Treatment**</td>
-                      <td>Retrieval Practice (Active Recall)</td>
-                      <td>Higher score/better recall</td>
-                  </tr>
-              </tbody>
-          </table>
-          
-          <h4>Procedure</h4>
-          <ol style="padding-left: 20px;">
-              <li>**Preparation:** Divide the study material (e.g., 20 complex terms from a textbook chapter, two different historical timelines) into **Set A** and **Set B** of equal length and perceived difficulty.</li>
-              <li>**Control (Rereading):** Study **Set A** by reading the material 4 times over a 30-minute session. Do not cover the answers or quiz yourself.</li>
-              <li>**Treatment (Retrieval Practice):** Study **Set B** by reading the material once, then covering the answers and attempting to write everything you can remember from scratch for the remaining time. Repeat the recall/check/recall cycle 4 times over the same 30-minute session.</li>
-              <li>**Delay:** Wait 48 hours (or 1 week, based on your course schedule) to simulate the delayed testing conditions of your observation.</li>
-              <li>**Test:** Take a single, cumulative test on both Set A and Set B material. The test must require you to **write down answers from scratch** (simulating the type of exam where you freeze).</li>
-              <li>**Measure:** Grade the test and calculate the percentage score for Set A (Rereading) and Set B (Retrieval Practice).</li>
-          </ol>
-          
-          <button class="btn btn-primary" type="button" id="experimentCompleteBtn">
-            I understand Experiment 1 — Continue to Data Analysis (Phase 6)
+          <button class="btn btn-primary" type="button" id="designContinueBtn">
+            Show me the results
           </button>
         </section>
 
+        <!-- PHASE 7: Results & Data -->
+        <section id="phase7" class="hidden" aria-labelledby="phase7Title">
+          <h3 id="phase7Title">Phase 7 — The Results</h3>
+          <div class="explanation-box">
+            <strong>What this phase is about:</strong> Here's what actually happened when researchers ran this 
+            experiment. The numbers are real data from the study. Compare them to your prediction. Were you right? 
+            Surprised? This is where science either confirms or challenges our intuitions.
+          </div>
+          <p><strong>Raw Data (Delayed Test Performance):</strong></p>
+          <ul>
+            <li>Repeated reading group: <strong>40% correct</strong></li>
+            <li>Retrieval practice group: <strong>61% correct</strong></li>
+          </ul>
+          <p><strong>Interpretation:</strong></p>
+          <p>
+            Retrieval practice outperforms rereading by <strong>21 percentage points</strong> on delayed tests 
+            when study time is matched. This is a large, practically meaningful effect. Students who actively 
+            recalled information—even without feedback—retained significantly more one week later than students 
+            who simply read the same material multiple times.
+          </p>
+          <p><strong>Conclusion: Hypothesis ACCEPTED.</strong></p>
+          <p>
+            Retrieval practice produces better long-term retention than repeated rereading.
+          </p>
+          <button class="btn btn-primary" type="button" id="resultsContinueBtn">
+            Plan my personal experiment
+          </button>
+        </section>
+
+        <!-- PHASE 8: Personal Application -->
+        <section id="phase8" class="hidden" aria-labelledby="phase8Title">
+          <h3 id="phase8Title">Phase 8 — Personal Application & Commitment</h3>
+          <div class="explanation-box">
+            <strong>What this phase is about:</strong> Research only matters if it changes what you do. Now you'll 
+            design your own mini-experiment to test this strategy in your actual coursework. Be specific about what 
+            you'll do differently, how you'll measure success, and when you'll check your results. This turns 
+            knowledge into action.
+          </div>
+          <p><strong>What This Means for YOU:</strong></p>
+          <p>
+            In practical terms, this means: stop rereading your notes over and over. Instead, close your materials 
+            and practice retrieving—write out what you remember, draw diagrams from memory, explain concepts aloud. 
+            The time investment is the same, but the approach forces your brain to actively reconstruct knowledge 
+            rather than passively recognize it. That discomfort you feel? That's learning.
+          </p>
+          
+          <div class="field">
+            <label for="expCourse">Which course will you test this in?</label>
+            <input id="expCourse" type="text" placeholder="e.g., Biology 101, Organic Chemistry" />
+          </div>
+          <div class="field">
+            <label for="expMaterial">What specific material?</label>
+            <input id="expMaterial" type="text" placeholder="e.g., Chapter 7 on cell respiration" />
+          </div>
+          <div class="field">
+            <label for="expChange">What will you do differently?</label>
+            <textarea id="expChange" placeholder="Instead of [old habit], I will [new strategy]..."></textarea>
+          </div>
+          <div class="field">
+            <label for="expMeasure">How will you measure success?</label>
+            <input id="expMeasure" type="text" placeholder="e.g., quiz score, ability to explain without notes" />
+          </div>
+          <div class="field">
+            <label for="expStart">When will you start?</label>
+            <input id="expStart" type="date" />
+          </div>
+          <div class="field">
+            <label for="expEval">When will you evaluate results?</label>
+            <input id="expEval" type="date" />
+          </div>
+          <div class="field">
+            <label>
+              <input type="checkbox" id="expCommit" style="width:auto;margin-right:0.3rem;" />
+              I commit to trying this experiment
+            </label>
+          </div>
+          <button class="btn btn-primary" type="button" id="commitContinueBtn" disabled>
+            Save my experiment design
+          </button>
+        </section>
+
+        <!-- PHASE 9: Deep Dive -->
+        <section id="phase9" class="hidden" aria-labelledby="phase9Title">
+          <h3 id="phase9Title">Phase 9 — Deep Dive Resource</h3>
+          <div class="explanation-box">
+            <strong>What this phase is about:</strong> Want to go deeper? Here are the original peer-reviewed 
+            studies and teaching resources. You don't have to read them all now, but they're here if you want 
+            to understand the methodology, see additional experiments, or cite this research in your own work.
+          </div>
+          <p><strong>Read the Full Research:</strong></p>
+          <ul>
+            <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9781761/" target="_blank" rel="noopener">Broad 2022 review on students' knowledge and use of retrieval practice</a></li>
+            <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3983480/" target="_blank" rel="noopener">Retrieval practice enhances new learning: the forward effect of testing</a></li>
+          </ul>
+          <p><strong>Key Takeaways:</strong></p>
+          <ul>
+            <li>Retrieval practice strengthens memory more than passive review, even without immediate feedback</li>
+            <li>The "testing effect" is one of the most robust findings in cognitive psychology</li>
+            <li>Benefits persist weeks and months later—exactly what you need for cumulative exams like the MCAT</li>
+            <li>Self-testing works across content types: facts, concepts, procedures, and applications</li>
+            <li>Most students underestimate how much retrieval practice helps and overestimate rereading</li>
+          </ul>
+          <button class="btn btn-primary" type="button" id="deepDiveContinueBtn">
+            Mark experiment complete
+          </button>
+        </section>
+
+        <!-- COMPLETION MESSAGE -->
+        <section id="phaseComplete" class="hidden">
+          <div style="background:#d1fae5;border:1px solid #059669;border-radius:0.5rem;padding:1rem;text-align:center;">
+            <h3 style="color:#065f46;margin-bottom:0.5rem;">✓ Experiment Complete!</h3>
+            <p style="color:#047857;">
+              You've completed the Active Recall Arena experiment. Your reflections and experiment design 
+              have been saved. Return to the dashboard to continue your journey.
+            </p>
+            <button class="btn btn-primary" type="button" data-nav="dashboard" style="margin-top:0.5rem;">
+              Return to dashboard
+            </button>
+          </div>
+        </section>
       </div>
     </div>
 
+    <!-- Roadmap -->
     <div class="view" id="view-roadmap" aria-labelledby="roadmapTitle">
       <div class="card stack">
         <h2 id="roadmapTitle">Your future study roadmap</h2>
         <p>
           After you complete all ten experiments, this space will help you design a weekly schedule built
-          around your peak time of day, evidence-based 50‑minute sessions, and a 1‑3‑7‑14‑30 spacing
+          around your peak time of day, evidence-based 50-minute sessions, and a 1-3-7-14-30 spacing
           rhythm.
         </p>
         <p class="meta">
           For now, this is a placeholder so you can wire up navigation and localStorage. The final version
-          will read from your experiment data to generate UWP‑specific recommendations and handouts you can
+          will read from your experiment data to generate UWP-specific recommendations and handouts you can
           share in Canvas.
         </p>
       </div>
@@ -576,7 +697,6 @@
 
   <script>
     const STORAGE_KEY = "premedStudyLab";
-    const WORD_COUNT_MIN = 50; 
 
     const defaultState = {
       experiments: {
@@ -585,10 +705,16 @@
           completed: false,
           personalReflection: "",
           reflectionWordCount: 0,
-          curiosityQuestion: "", 
-          curiosityWordCount: 0, 
           predictionChoice: "",
           predictionConfidence: "",
+          experimentDesign: {
+            course: "",
+            material: "",
+            change: "",
+            measure: "",
+            start: "",
+            eval: ""
+          },
           completedDate: null
         }
       },
@@ -606,10 +732,7 @@
         const raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) return structuredClone(defaultState);
         const parsed = JSON.parse(raw);
-        // Ensure new fields are added if loading an old state
-        return { ...structuredClone(defaultState), ...parsed, 
-          experiments: { ...structuredClone(defaultState).experiments, ...parsed.experiments }
-        };
+        return { ...structuredClone(defaultState), ...parsed };
       } catch (e) {
         return structuredClone(defaultState);
       }
@@ -679,7 +802,7 @@
       if (exp.completed) {
         chip.textContent = "Completed";
         chip.classList.add("completed");
-      } else if (exp.personalReflection || exp.curiosityQuestion || exp.predictionChoice) {
+      } else if (exp.personalReflection || exp.predictionChoice) {
         chip.textContent = "In progress";
         chip.classList.remove("completed");
       } else {
@@ -691,19 +814,19 @@
     const reflectionTextEl = document.getElementById("reflectionText");
     const reflectionMetaEl = document.getElementById("reflectionMeta");
     const reflectionContinueBtn = document.getElementById("reflectionContinueBtn");
+    const phase2El = document.getElementById("phase2");
+    const phase3El = document.getElementById("phase3");
+    const phase4El = document.getElementById("phase4");
+    const phase5El = document.getElementById("phase5");
+    const phase6El = document.getElementById("phase6");
+    const phase7El = document.getElementById("phase7");
+    const phase8El = document.getElementById("phase8");
+    const phase9El = document.getElementById("phase9");
+    const phaseCompleteEl = document.getElementById("phaseComplete");
     
-    const curiosityTextEl = document.getElementById("curiosityText");
-    const curiosityMetaEl = document.getElementById("curiosityMeta");
-    const curiosityContinueBtn = document.getElementById("curiosityContinueBtn");
-
-    const researchQuestionContinueBtn = document.getElementById("researchQuestionContinueBtn");
-
     const predictionChoiceEl = document.getElementById("predictionChoice");
     const predictionConfidenceEl = document.getElementById("predictionConfidence");
     const predictionContinueBtn = document.getElementById("predictionContinueBtn");
-    
-    const experimentCompleteBtn = document.getElementById("experimentCompleteBtn");
-
 
     function countWords(str) {
       return (str.trim().match(/\S+/g) || []).length;
@@ -712,66 +835,60 @@
     function hydrateExperimentUI() {
       const exp = state.experiments.activerecallarena;
       if (!exp) return;
-      
-      // Phase 1: Reflection
-      reflectionTextEl.value = exp.personalReflection || "";
-      let words1 = countWords(exp.personalReflection || "");
-      reflectionMetaEl.textContent = words1 + " / " + WORD_COUNT_MIN + " words";
-      reflectionContinueBtn.disabled = words1 < WORD_COUNT_MIN;
-      
-      // Phase 2: Curiosity
-      curiosityTextEl.value = exp.curiosityQuestion || "";
-      let words2 = countWords(exp.curiosityQuestion || "");
-      curiosityMetaEl.textContent = words2 + " / " + WORD_COUNT_MIN + " words";
-      curiosityContinueBtn.disabled = words2 < WORD_COUNT_MIN;
 
-      // Phase 4: Hypothesis
+      reflectionTextEl.value = exp.personalReflection || "";
+      reflectionMetaEl.textContent = (exp.reflectionWordCount || 0) + " / 50 words";
+      
+      if ((exp.reflectionWordCount || 0) >= 50) {
+        reflectionContinueBtn.disabled = false;
+        phase2El.classList.remove("hidden");
+      } else {
+        reflectionContinueBtn.disabled = true;
+        phase2El.classList.add("hidden");
+      }
+
       predictionChoiceEl.value = exp.predictionChoice || "";
       predictionConfidenceEl.value = exp.predictionConfidence || "";
-      validatePredictionInputs();
       
-      // Experiment is complete if this button was previously clicked.
-      if (exp.completed) {
-        // Future: lock inputs if complete
-      }
+      document.getElementById("expCourse").value = exp.experimentDesign.course || "";
+      document.getElementById("expMaterial").value = exp.experimentDesign.material || "";
+      document.getElementById("expChange").value = exp.experimentDesign.change || "";
+      document.getElementById("expMeasure").value = exp.experimentDesign.measure || "";
+      document.getElementById("expStart").value = exp.experimentDesign.start || "";
+      document.getElementById("expEval").value = exp.experimentDesign.eval || "";
+      
+      validatePredictionInputs();
     }
 
     reflectionTextEl.addEventListener("input", () => {
       const text = reflectionTextEl.value;
       const words = countWords(text);
-      reflectionMetaEl.textContent = words + " / " + WORD_COUNT_MIN + " words";
+      reflectionMetaEl.textContent = words + " / 50 words";
       const exp = state.experiments.activerecallarena;
       exp.personalReflection = text;
       exp.reflectionWordCount = words;
-      reflectionContinueBtn.disabled = words < WORD_COUNT_MIN;
+      reflectionContinueBtn.disabled = words < 50;
       saveState();
     });
 
     reflectionContinueBtn.addEventListener("click", () => {
-      // Logic for moving forward is handled by the visual hierarchy now being displayed
-      // We keep this to trigger state changes/saves if needed later
-      saveState();
-    });
-    
-    curiosityTextEl.addEventListener("input", () => {
-      const text = curiosityTextEl.value;
-      const words = countWords(text);
-      curiosityMetaEl.textContent = words + " / " + WORD_COUNT_MIN + " words";
-      const exp = state.experiments.activerecallarena;
-      exp.curiosityQuestion = text;
-      exp.curiosityWordCount = words;
-      curiosityContinueBtn.disabled = words < WORD_COUNT_MIN;
-      saveState();
+      phase2El.classList.remove("hidden");
+      phase2El.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
-    curiosityContinueBtn.addEventListener("click", () => {
-      // Logic for moving forward is handled by the visual hierarchy now being displayed
-      saveState();
+    document.getElementById("curiosityContinueBtn").addEventListener("click", () => {
+      phase3El.classList.remove("hidden");
+      phase3El.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
-    researchQuestionContinueBtn.addEventListener("click", () => {
-      // Logic for moving forward is handled by the visual hierarchy now being displayed
-      saveState();
+    document.getElementById("researchContinueBtn").addEventListener("click", () => {
+      phase4El.classList.remove("hidden");
+      phase4El.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    document.getElementById("hypothesisContinueBtn").addEventListener("click", () => {
+      phase5El.classList.remove("hidden");
+      phase5El.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
     function validatePredictionInputs() {
@@ -798,16 +915,56 @@
     });
 
     predictionContinueBtn.addEventListener("click", () => {
-      // Logic for moving forward is handled by the visual hierarchy now being displayed
-      saveState();
+      phase6El.classList.remove("hidden");
+      phase6El.scrollIntoView({ behavior: "smooth", block: "start" });
     });
-    
-    experimentCompleteBtn.addEventListener("click", () => {
-        alert("Experiment 1 (Phases 1-5) is complete! Proceed to Phase 6: Data Collection and Analysis.");
-        state.experiments.activerecallarena.completed = true;
-        state.experiments.activerecallarena.completedDate = new Date().toISOString();
+
+    document.getElementById("designContinueBtn").addEventListener("click", () => {
+      phase7El.classList.remove("hidden");
+      phase7El.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    document.getElementById("resultsContinueBtn").addEventListener("click", () => {
+      phase8El.classList.remove("hidden");
+      phase8El.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    function validateExperimentDesign() {
+      const exp = state.experiments.activerecallarena;
+      const design = exp.experimentDesign;
+      const commit = document.getElementById("expCommit").checked;
+      const allFilled = design.course && design.material && design.change && 
+                       design.measure && design.start && design.eval && commit;
+      document.getElementById("commitContinueBtn").disabled = !allFilled;
+      return allFilled;
+    }
+
+    ["expCourse", "expMaterial", "expChange", "expMeasure", "expStart", "expEval"].forEach(id => {
+      document.getElementById(id).addEventListener("input", (e) => {
+        const exp = state.experiments.activerecallarena;
+        const field = id.replace("exp", "").toLowerCase();
+        exp.experimentDesign[field] = e.target.value;
         saveState();
-        showView("dashboard");
+        validateExperimentDesign();
+      });
+    });
+
+    document.getElementById("expCommit").addEventListener("change", () => {
+      validateExperimentDesign();
+    });
+
+    document.getElementById("commitContinueBtn").addEventListener("click", () => {
+      phase9El.classList.remove("hidden");
+      phase9El.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    document.getElementById("deepDiveContinueBtn").addEventListener("click", () => {
+      const exp = state.experiments.activerecallarena;
+      exp.completed = true;
+      exp.completedDate = new Date().toISOString().split('T')[0];
+      saveState();
+      phaseCompleteEl.classList.remove("hidden");
+      phaseCompleteEl.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
     document.getElementById("resetBtn").addEventListener("click", () => {
@@ -823,13 +980,20 @@
 
     document.getElementById("exportBtn").addEventListener("click", () => {
       const exp = state.experiments.activerecallarena;
-      let text = "PreMed Learning Science Lab — Reflections Export (UW–Parkside)\n\n";
+      let text = "PreMed Learning Science Lab – Reflections Export (UW–Parkside)\n\n";
       text += "Active Recall Arena\n";
       text += "--------------------\n";
-      text += "Phase 1 Reflection:\n" + (exp.personalReflection || "[none]") + "\n\n";
-      text += "Phase 2 Curiosity Question:\n" + (exp.curiosityQuestion || "[none]") + "\n\n";
-      text += "Phase 4 Prediction choice: " + (exp.predictionChoice || "[none]") + "\n";
-      text += "Phase 4 Prediction confidence (1–5): " + (exp.predictionConfidence || "[none]") + "\n";
+      text += "Personal reflection:\n" + (exp.personalReflection || "[none]") + "\n\n";
+      text += "Prediction choice: " + (exp.predictionChoice || "[none]") + "\n";
+      text += "Prediction confidence (1–5): " + (exp.predictionConfidence || "[none]") + "\n\n";
+      text += "Experiment Design:\n";
+      text += "Course: " + (exp.experimentDesign.course || "[none]") + "\n";
+      text += "Material: " + (exp.experimentDesign.material || "[none]") + "\n";
+      text += "Change: " + (exp.experimentDesign.change || "[none]") + "\n";
+      text += "Success measure: " + (exp.experimentDesign.measure || "[none]") + "\n";
+      text += "Start date: " + (exp.experimentDesign.start || "[none]") + "\n";
+      text += "Evaluation date: " + (exp.experimentDesign.eval || "[none]") + "\n";
+      
       const blob = new Blob([text], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
